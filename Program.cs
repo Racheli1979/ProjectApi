@@ -78,9 +78,9 @@ if (app.Environment.IsDevelopment())
 }
 app.MapGet("/", () => Results.Redirect("/login.html"));
 
-app.UseAuditLogMiddleware();
+app.UseLogMiddleware();
 
-app.UseErrorHandlingMiddleware();
+//app.UseErrorHandlingMiddleware();
 
 app.UseDefaultFiles();
 
