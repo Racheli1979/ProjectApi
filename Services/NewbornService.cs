@@ -48,4 +48,13 @@ namespace ProjectApi.Services
 
         public int Count { get =>  NewbornList.Count();}
     }
+
+     public static class NewbornServiceHelper
+    {
+        public static void AddNewbornService(this IServiceCollection services)
+        {
+            services.AddSingleton<INewbornService, NewbornService>();
+        }
+
+    }
 }
