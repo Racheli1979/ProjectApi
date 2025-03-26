@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
-    <h1>להתחברות מלא את הפרטים</h1>
-    <form onsubmit="login(event)" id="form">
-        <input type="text" id="userName" placeholder="הכנס שם משתמש" required><br/>
-        <input type="password" id="password" placeholder="הכנס סיסמה" required><br/>
-        <button type="submit">להתחברות</button>
-        <p id="error" class="hidden">שם המשתמש או הסיסמה שהוכנסו שגויים</p>
-    </form>
+    <div class="login-container">
+        <h2>התחברות</h2>
+        <form onsubmit="login(event)">
+            <input type="text" id="userName" placeholder="שם משתמש" required>
+            <input type="password" id="password" placeholder="סיסמה" required>
+            <button type="submit">התחבר</button>
+            <p id="error-message" class="hidden">שם משתמש או סיסמה שגויים</p>
+        </form>
+    </div>
+
     <!-- כפתורים למנהל-->
     <div id="admin-buttons" style="display:none;">
         <button onclick="products()">הצגת מוצרים</button>
@@ -27,6 +32,8 @@
         <br><br>
         <button onclick="user()">ניהול פרטי המשתמש</button>
     </div>
+
     <script src="js/login.js"></script>
 </body>
+
 </html>

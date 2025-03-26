@@ -1,4 +1,4 @@
-const uri = '/newborn';
+const uri = '/NewbornAccessories';
 let newbornItems = [];
 function getToken() {
     return localStorage.getItem("token");
