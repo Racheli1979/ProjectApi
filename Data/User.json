@@ -1,0 +1,149 @@
+[
+    {
+        "Id": 1,
+        "Username": "Racheli",
+        "Password": "98765",
+        "Email": "racheli1542@gmail.com",
+        "Role": "Admin"
+    },
+    {
+        "Id": 2,
+        "Username": "Miri",
+        "Password": "54287",
+        "Email": "m0548545758@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 3,
+        "Username": "Tehila",
+        "Password": "7844",
+        "Email": "t41275@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 5,
+        "Username": "Tzipi",
+        "Password": "1526///jo58",
+        "Email": "Tzipi174847@gmail.com",
+        "Role": "Admin"
+    },
+    {
+        "Id": 6,
+        "Username": "Yael",
+        "Password": "420/*.;36",
+        "Email": "Yael1720@gmail.com",
+        "Role": "Admin"
+    },
+    {
+        "Id": 7,
+        "Username": "Nechami",
+        "Password": "15810",
+        "Email": "Nechami@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 8,
+        "Username": "Chani",
+        "Password": "7&8*9(0)",
+        "Email": "chani16986@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 9,
+        "Username": "Yehudit",
+        "Password": "Ya@k0v_123",
+        "Email": "ye474777@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 10,
+        "Username": "Efrat",
+        "Password": "El1y@hu_123",
+        "Email": "Efrat@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 11,
+        "Username": "Esti",
+        "Password": "E7e%ih%hf%",
+        "Email": "Esti159445@gmail.com",
+        "Role": "Admin"
+    },
+    {
+        "Id": 12,
+        "Username": "Rivki",
+        "Password": "R1vk@_123",
+        "Email": "rivka@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 13,
+        "Username": "Sari",
+        "Password": "S@rah_123",
+        "Email": "sarah@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 14,
+        "Username": "Ruti",
+        "Password": "R3hbs**jx***",
+        "Email": "Ruti@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 15,
+        "Username": "Leah",
+        "Password": "L3@h_123",
+        "Email": "leah@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 16,
+        "Username": "Shira",
+        "Password": "Shl0m0_123",
+        "Email": "Shira@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 17,
+        "Username": "Gili",
+        "Password": "G2l2@m_123",
+        "Email": "Gili@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 18,
+        "Username": "Elisheva",
+        "Password": "El1y@hu_123",
+        "Email": "Elisheva@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 19,
+        "Username": "Rachel",
+        "Password": "R@ch3l_123",
+        "Email": "rachel@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 20,
+        "Username": "Avigail",
+        "Password": "Ah@r0n_123",
+        "Email": "Avigail@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 21,
+        "Username": "Tamar",
+        "Password": "T@m@r_123",
+        "Email": "Tamar@gmail.com",
+        "Role": "User"
+    },
+    {
+        "Id": 22,
+        "Username": "Naama",
+        "Password": "N@a@a@m@a_5847",
+        "Email": "Naama@gmail.com",
+        "Role": "User"
+    }
+]

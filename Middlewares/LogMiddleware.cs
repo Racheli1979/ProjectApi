@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace ProjectApi.Middlewares;
 
 public class LogMiddleware
@@ -12,18 +10,16 @@ public class LogMiddleware
         this.next = next;
         this.logger = logger;
     }
+
     public async Task Invoke(HttpContext c)
     {
-        var sw = new Stopwatch();
-        sw.Start();
-        await next.Invoke(c);
-        logger.LogDebug($"{c.Request.Path}.{c.Request.Method} took {sw.ElapsedMilliseconds}ms."
-            + $" User: {c.User?.FindFirst("userId")?.Value ?? "unknown"}");
-        
+        logger.LogInformation($"Hundling requst: {c.Request.Path}.{c.Request.Method}");
+        await next(c);
+        logger.LogInformation($"Finished hundling requst: {c.Request.Path}.{c.Request.Method} Response status: {c.Response.StatusCode}");
     }
 }
 
-public static partial class MiddlewareExtensions
+public static partial class MiddlewareExtensionsF
 {
     public static IApplicationBuilder UseLogMiddleware(this IApplicationBuilder builder)
     {

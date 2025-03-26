@@ -1,64 +1,98 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using ProjectApi.Models;
-using ProjectApi.Services;
 using ProjectApi.Interfaces;
 
-namespace ProjectApi.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-
-public class NewbornAccessoriesController : ControllerBase
+namespace ProjectApi.Controllers
 {
-    private INewbornService NewbornService;
-    public NewbornAccessoriesController(INewbornService newbornService)
-    {
-        this.NewbornService = newbornService;
-    }
+   [ApiController]
+   [Route("[controller]")]
+   // המחלקה הזאת למשתמשים - וזה כולל בתוכה את המנהלים
+   [Authorize(Policy = "User")]  
+   public class NewbornAccessoriesController : ControllerBase
+   {
+       private INewbornService newbornService;
 
-    [HttpGet]
-    public IEnumerable<NewbornAccessories> Get()
-    {
-        return NewbornService.GetAll();
-    }
+       public NewbornAccessoriesController(INewbornService newbornService)
+       {
+            this.newbornService = newbornService;
+       }
 
-    [HttpGet("{id}")]
-    public ActionResult<NewbornAccessories> Get(int id)
-    {
-        var newborn = NewbornService.Get(id);
-        if (newborn is null)
-            return BadRequest("invalid id");
-        return newborn;
-    }
+       private int? UserId
+       {
+           get
+           {
+               var idClaim = User.FindFirst("id");
+               return idClaim != null && int.TryParse(idClaim.Value, out int userId) ? userId : (int?)null;
+           }
+       }
 
-    [HttpPost]
-    public ActionResult Insert(NewbornAccessories newborn)
-    {        
-        NewbornService.Add(newborn);
-        return CreatedAtAction(nameof(Insert), new { id = newborn.Id }, newborn);
-    }  
+       private string? userRole
+       {
+           get
+            {
+                var roleClaim = User.FindFirst("type");
+                return roleClaim?.Value; 
+            }
+       }
 
-    
-    [HttpPut("{id}")]
-    public ActionResult Update(int id, NewbornAccessories newborn)
-    { 
-        var oldNewBorn = NewbornService.Get(id);
-        if (oldNewBorn == null) 
-            return BadRequest("invalid id");
-        if (newborn.Id != oldNewBorn.Id)
-            return BadRequest("id mismatch");
+       [HttpGet]
+       public ActionResult<List<NewbornAccessories>> GetAll()
+       {
+            var newbornList = newbornService.GetAll() ?? new List<NewbornAccessories>();
 
-        NewbornService.Update(newborn);
-        return NoContent();
-    } 
+            if(userRole == "Admin")
+                return newbornList;
+            return newbornList.Where(n => n.UserId == UserId).ToList();
+       }
 
-    [HttpDelete("{id}")]
-    public ActionResult Delete(int id){
-        var oldNewBorn = NewbornService.Get(id);
-        if (oldNewBorn is null) 
-            return BadRequest("invalid id");
-        NewbornService.Delete(id);
-        return NoContent();
-    }
-    
+       [HttpGet("{id}")]
+        public ActionResult<NewbornAccessories> Get(int id)
+        {
+            var newborn = newbornService.Get(id);
+            if (newborn?.UserId != UserId)
+                return Unauthorized();
+
+            if (newborn == null)
+                return NotFound();
+            return newborn;
+        }
+
+        [HttpPost]
+        public IActionResult Create(NewbornAccessories newborn)
+        {
+            newbornService.Add(newborn, UserId.GetValueOrDefault());
+            return CreatedAtAction(nameof(Create), new { id = newborn.Id }, newborn);
+        }
+
+
+        [HttpPut("{id}")]
+        public ActionResult Update(int id, NewbornAccessories newborn)
+        {
+            if (userRole != "Admin" && id != newborn.Id)
+                return Unauthorized();
+            var exitingNewborn = newbornService.Get(id);
+            if (exitingNewborn is null)
+                return NotFound();
+            if (userRole != "Admin" && UserId != exitingNewborn.UserId)
+                return Unauthorized();
+            newbornService.Update(newborn, UserId.GetValueOrDefault());
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            var newborn = newbornService.Get(id);
+            if (newborn is null)
+                return NotFound();
+
+            if (newborn.UserId != UserId && userRole != "Admin")
+                return Unauthorized();
+
+            newbornService.Delete(id);
+            return Content(newbornService.Count.ToString());
+
+        }
+   } 
 }
